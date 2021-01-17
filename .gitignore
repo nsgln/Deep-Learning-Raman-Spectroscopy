@@ -1,2 +1,8 @@
 .ipynb_checkpoints
 */.ipynb_checkpoints/*
+
+# IPython
+profile_default/
+ipython_config.py
+
+Bacteria_TL/__pycache__/

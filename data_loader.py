@@ -82,6 +82,6 @@ def load_data():
             if(X[i][j] < 0):
                 X[i][j] = 0
     
-    #Return X, Y and groups
-    return X, Y, groups
+    #Return X, Y, groups and coord
+    return X, Y, groups, coord
 

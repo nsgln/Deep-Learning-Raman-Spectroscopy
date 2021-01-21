@@ -34,14 +34,15 @@ class Extractor(nn.Module):
         #NO LINEAR LAYER
 
     def encode(self, x):
-        x = F.relu(self.bn1(self.conv1(x)))
+        x = F.relu(self.bn1(self.conv1(x)))        
         x = self.encoder(x)
-        z = x.view(x.size(0), -1)
-        return z
+        #z = x.view(x.size(0), -1)
+        #return z
+        return x
 
     def forward(self, x):
         z = self.encode(x)
-        return self.linear(z)
+        return z
 
 
     def _make_layer(self, out_channels, num_blocks, stride=1):

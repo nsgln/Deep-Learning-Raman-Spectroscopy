@@ -38,6 +38,10 @@
 \usepackage{graphicx}
 \usepackage[colorinlistoftodos]{todonotes}
 
+%Added packages
+\usepackage{multirow}
+\usepackage[flushleft]{threeparttable}
+
 \begin{document}
 
 \begin{titlepage}
@@ -105,6 +109,65 @@ The introduction should provide a clear statement of the problem posed by the pr
 \section{Datasets}
 In this section the available data sets must be presented. The term dataset refers to any type of information source, for example web services for geolocation fall into this category. 
 In addition, all necessary data manipulation processes, such as cleaning and enrichment with external sources, must be presented and discussed.
+
+The main dataset provided is composed of spectra belonging to patients affected by Amyotrophic Lateral Sclerosis (ALS) and healthy ones (CTRL).
+
+We also use pretrained models that are trained on an external bacteria dataset.
+
+\begin{table}
+\centering
+\begin{threeparttable}
+\caption{This table represents the repartition of patients and spectra belonging to the ALS and CTRL groups}
+\begin{tabular}{ |c|c|c|c|c| }
+\hline
+\multicolumn{5}{ |c| }{Repartition of spectra and patients in dataset} \\
+\hline
+Groups & Patient ID & Samples range  & Samples count & Number of samples per group\\ \hline
+\multirow{20}{*}{ALS} & ALS01 & 1-60 &  60 & \multirow{20}{*}{393}\\
+ & ALS02 & 61-78 & 18 &\\
+ & ALS05 & 79-114 & 36 &\\
+ & ALS07 & 115-150 & 36 &\\ 
+ & ALS08 & 151 -194 & 44 &\\
+ & ALS09 & 195-210 & 16 &\\
+ & ALS10 & 211-225 & 15 &\\
+ & ALS11 & 226-242 & 16\text{*} &\\
+ & ALS12 & 243-256 & 14 &\\
+ & ALS13 & 257-281 & 25 &\\
+ & ALS14 & 282-300 & 19 &\\
+ & ALS15 & 301-314 & 14 &\\
+ & ALS16 & 315-324 & 10 &\\
+ & ALS17 & 325-334 & 10 &\\
+ & ALS18 & 335-344 & 10 &\\
+ & ALS20 & 345-354 & 10 &\\
+ & ALS22 & 355-364 & 10 &\\
+ & ALS23 & 365-374 & 10 &\\
+ & ALS24 & 375-384 & 10 &\\
+ & ALS25 & 385-394 & 10 &\\
+ \hline
+\multirow{10}{*}{CTRL} & CTRL01 & 1-33 & 33 & \multirow{10}{*}{198}\\
+ & CTRL02 & 34-76 & 43 &\\
+ & CTRL03 & 77-91 & 15 &\\ 
+ & CTRL04 & 92-138 & 47 &\\
+ & CTRL05 & 139-149 & 11 &\\
+ & CTRL06 & 150-158 & 9 &\\
+ & CTRL07 & 159-168 & 10 &\\
+ & CTRL08 & 169-178 & 10 &\\
+ & CTRL09 & 179-188 & 10 &\\
+ & CTRL10 & 189-198 & 10 &\\
+ \hline
+
+
+\end{tabular}
+\begin{tablenotes}
+      \small
+      \item \text{*} The 227th sample is missing. It has probably been removed while processing because it was "too bad".
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+
+
+
 
 \section{The Methodological Approach}
 

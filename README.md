@@ -26,13 +26,13 @@ It is also composed of 5 jupyter notebooks :
  - **1_test_models_dataset.ipynb** - file to *load the data*, *pre-process it* (removing negative values and features selection), *plot some of spectra* and *predict* on simple (LogisticRegression, DecisionTree) and a bit more complex (SVM, RandomForest) Machine Learning (ML) models using different splitting techniques (LeaveOneGroupOut and GroupKFold)
  - **2_predictions_with_pretrained_models.ipynb** - Using the pretrained models of Bacteria-ID on our dataset to make some predictions using average accuracy and standard deviation.
  - **3_fine_tuning_experiments.ipynb** - After a custom splitting dataset technique producing a "finetunable" set and a "test" set, we finetune the predicted models in order to determine the best model and increase our average accuracy.
- - **4_features_extraction.ipynb** -
+ - **4_features_extraction.ipynb** - Using each pretrained models of Bacteria-ID, features are extracted ("representing" our data), from different layer. Then, two different models are tested on these features : a classical model and a deep one. 
  - **5_data_augmentation.ipynb** - Using some data augmentation technique on spectral data (offset, multiplication and Gaussian noise), the finetuned models seems to obtained better results.
 
 
 Finally the remaining files are :
  - *data_loader.py* - a python file to load the data (factorization of code)
- - *extractor.py* - a modification of the resnet.py file class to extract features (by removing the final Linear Layer)
+ - *extractor.py* - a modification of the resnet.py file class to extract features (by removing the final layers)
     
     
 ## Requirements

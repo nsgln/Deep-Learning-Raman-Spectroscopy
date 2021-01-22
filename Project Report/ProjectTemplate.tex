@@ -41,6 +41,8 @@
 %Added packages
 \usepackage{multirow}
 \usepackage[flushleft]{threeparttable}
+\usepackage{hyperref}
+\usepackage{float}
 
 \begin{document}
 
@@ -191,7 +193,7 @@ At the beginning, 4 classical ML classifiers have been implemented :
 If the correlation of spectral data among the same patient is ignored, the models are overfitted caused by a data leakage.
 Therefore, to properly have an unbiased diagnostic method, there is a need to carefully split the training and test data. It is mandatory that spectra belonging to the same patients don't show up both in the training set and in the test set.
 To maximaly exploit the available training data, a Leave-One-Patient-Out Cross Validation and a 8 GroupKFold on patients have been implemented. 
-It is worth mentionning that some feature preprocessing has also been done with Principal Component Analysis (PCA) which seems to increase the performance of the modelS (except SVM because the kernelized machine is already doing a similar work).
+It is worth mentionning that some feature preprocessing has also been done with Principal Component Analysis (PCA) which seems to increase the performance of the models (except SVM because the kernelized machine is already doing a similar work).
 
 After setting up these baselines, the second and central step was the discovery and the application of the methods used in the bacteria-ID paper. In this respect, some basic predictions have been firstly computed on the raw dataset using the three pre-trained models (CPKT extension): 
 \begin{itemize}
@@ -199,9 +201,9 @@ After setting up these baselines, the second and central step was the discovery 
 \item finetuned model 
 \item clinical pretrained model
 \end{itemize}
-There are saved parameters for the pre-trained CNN which is based on the ResNet architecture and dynamically modified to fit our input and output dimensions.
+There are saved parameters for the pre-trained CNN which is based on the ResNet architecture and dynamically modified to fit the input and output dimensions.
 
-Then, the fine-tuning experiments step resulted from the observation that none of the model obtain good performances. It is obviously due to the difference between the source and target domains of the training set.
+Then, the fine-tuning experiments step resulted from the observation that none of the model obtain good performances. It is due to the difference between the source and target domains of the training set.
 
 Given the custom splitting method presented in the bacteria-ID paper the patients are divided into sub-groups of 5 patients each. The samples of the first three are used for the training set, the fourth for the validation set and the remaining for the test set. Each of the samples selected are then shuffled to make sure that no links may be found by the models. Some of which are selected for finetuning the models and the remaining for predicting on the finetuned models.
 However as we have a lack of data it is not possible to apply this method (some of the patients have only 9 samples)
@@ -211,7 +213,7 @@ Therefore, a more suitable method has been developped. First, the data is divide
 \item a "full test" set which is used for computing the performances of the finetuned models. It is composed of 10 patients.
 \end{itemize}  
 The repartition among the patients have to be wisely selected due to data scarsity. Each of the groups has to be well represented into the 2 datasets. 
-A raisonable ratio in terms of patient would be 12/8 for ALS (i.e 8/2 for CTRL) or 14/6 for ALS (i.e 6/4). 
+A raisonable ratio in terms of patient would be 12/8 for ALS (i.e. 8/2 for CTRL) or 14/6 for ALS (i.e. 6/4 for CTRL). 
 
 It appears that it increases in terms of accuracy performances and more stability arises (the standard deviation is lowered).
 
@@ -219,6 +221,43 @@ It appears that it increases in terms of accuracy performances and more stabilit
 But, as shown after multiple iterations, the choice of the patient repartition (and implicitely the number of samples of one group over another) have great influences on the final result.
 A finetuned model which has been trained on a bigger amount of ALS samples will have a big problem to deal with CTRL when predicting. Therefore the results are biased. 
 However the case when the finetuned model is trained on a bigger amount of CTRL never happens !
+
+An other TL experiment is made, using the technique of "features extraction". That means the pre-trained models are used, not to predict classes, but to extract features from data. 
+
+To this purpose, each of the three provided models are cut at different levels :
+\begin{itemize}
+\item After the last block : in this case, just the Linear layer is removed. This kind of model extract 37 for each spectrum.
+\item Before the last block : here, all the last block is removed. That is resulting 74 features for each spectrum.
+\item Before the two last blocks : this is removing the entire two last blocks of the pre-trained model. It is producing 147 features for each spectrum.
+\end{itemize}
+
+From this technique, 9 features extractors are obtained, taking the data as input ang returning features as output. To obtain prediction from these, two different models are proposed :
+\begin{itemize}
+\item Classical ML model : Decision Tree Classifier
+\item Deep ML model described in table 2.
+\end{itemize}
+
+\begin{table}[H]
+\centering
+\begin{threeparttable}
+\caption{This table describes the deep ML model created}
+\begin{tabular}{ |c|c|c| }
+ \hline
+  Layer type & Input & Output \\
+  \hline
+  InputLayer & Number of features extracted & Number of features extracted \\
+  DenseLayer & Number of features extracted & 128 \\
+  DenseLayer & 128 & 64 \\
+  DenseLayer & 64 & 32 \\
+  DenseLayer & 32 & 16 \\
+  Dropout & 16 & 16 \\
+  DenseLayer & 16 & 1 \\
+  \hline
+\end{tabular}
+\end{threeparttable}
+\end{table}
+
+On classical models, this techniques increase the performances. On deep models, the same problem of data is raised. Indeed, when data are randomly "well" distribued, this method can achieve really good performances, but when data are not, very bad performances are noticied.
 
 The repartition among patients is not the core problem. The number of spectral samples per patient influence drastically the final result. 
 So, the only conclusion possible is to develop some techniques of data augmentation in order to have :
@@ -236,6 +275,9 @@ This led us to the final step : the data augmentation techniques.
 
 Although low the performances are increased as shown in the following section.
 
+The data augmentation techniques previously described are also applied with features extraction. For runtime reasons, only one features extractors is used, which is the one obtained from the "Finetuned pre-trained model" with a cut before the last block.
+As expected, the dataset obtain is more balanced, which allow more constant results for models.
+
 \section{Results and Evaluation}
 The Results section is dedicated to presenting the actual results (i.e. measured and calculated quantities), not to discussing their meaning or interpretation. The results should be summarized using appropriate Tables and Figures (graphs or schematics). Every Figure and Table should have a legend that describes concisely what is contained or shown. Figure legends go below the figure, table legends above the table. Throughout the report, but especially in this section, pay attention to reporting numbers with an appropriate number of significant figures. 
 
@@ -245,6 +287,9 @@ The discussion section aims at interpreting the results in light of the project'
 
 \section{Conclusions}
 Conclusions should summarize the central points made in the Discussion section, reinforcing for the reader the value and implications of the work. If the results were not definitive, specific future work that may be needed can be (briefly) described. The conclusions should never contain ``surprises''. Therefore, any conclusions should be based on observations and data already discussed. It is considered extremely bad form to introduce new data in the conclusions.
+
+\section{Data and code availability}
+All the data and the code are available on \href{https://github.com/nsgln/Deep-Learning-Raman-Spectroscopy}{GitHub}
 
 \section*{References}
 

@@ -194,7 +194,7 @@ Therefore, to properly have an unbiased diagnostic method, there is a need to ca
 To maximaly exploit the available training data, a Leave-One-Patient-Out Cross Validation and a 8 GroupKFold on patients have been implemented. 
 It is worth mentionning that some feature preprocessing has also been done with Principal Component Analysis (PCA) which seems to increase the performance of the models (except SVM because the kernelized machine is already doing a similar work).
 
-After setting up these baselines, the second and central step was the discovery and the application of the methods used in the bacteria-ID paper. In this respect, some basic predictions have been firstly computed on the raw dataset using the three pre-trained models (CPKT extension): 
+After setting up these baselines, the second and central step was the discovery and the application of the methods used in the bacteria-ID paper\cite{bacteria-ID}. In this respect, some basic predictions have been firstly computed on the raw dataset using the three pre-trained models (CPKT extension): 
 \begin{itemize}
 \item pretrained model 
 \item finetuned model 
@@ -204,7 +204,7 @@ There are saved parameters for the pre-trained CNN which is based on the ResNet 
 
 The fine-tuning experiments resulted from the observation that none of the model obtain good performances. It is due to the difference between the source and target domains of the training set.
 
-Given the custom splitting method presented in the bacteria-ID paper the patients are divided into sub-groups of 5 patients each. The samples of the first three are used for the training set, the fourth for the validation set and the last one for the test set. Each of the samples selected are then shuffled to make sure that no implicit link may be found by the models. Some of these spectra are selected for finetuning the models and the remaining ones for predicting on the finetuned models.
+Given the custom splitting method presented in the bacteria-ID paper\cite{bacteria-ID} the patients are divided into sub-groups of 5 patients each. The samples of the first three are used for the training set, the fourth for the validation set and the last one for the test set. Each of the samples selected are then shuffled to make sure that no implicit link may be found by the models. Some of these spectra are selected for finetuning the models and the remaining ones for predicting on the finetuned models.
 However as there is a clear lack of data it is not possible to apply this method (some of the patients have only 9 samples !).
 Therefore, a more convenient method has been developped. First, the data is divided into:
 \begin{itemize}
@@ -276,7 +276,43 @@ The data augmentation techniques previously described are also applied with feat
 As expected, the dataset obtained is more balanced, which allows more constant results for models.
 
 \section{Results and Evaluation}
-The Results section is dedicated to presenting the actual results (i.e. measured and calculated quantities), not to discussing their meaning or interpretation. The results should be summarized using appropriate Tables and Figures (graphs or schematics). Every Figure and Table should have a legend that describes concisely what is contained or shown. Figure legends go below the figure, table legends above the table. Throughout the report, but especially in this section, pay attention to reporting numbers with an appropriate number of significant figures. 
+For each experiment, the results are variable. In this part, best results obtained for each experiment is presented.
+
+Using the pre-trained models, without adding fine-tuning, an average accuracy score of 66\% with a standard deviation of 1.11 is obtained with the "finetuned" one. (Figure 1)
+\begin{figure}[H]
+\centering
+\caption{Confusion-matrix resulting from the pre-trained model}
+\includegraphics[width=8cm, height=8cm]{raw_model_results}
+\end{figure}
+
+Adding fine-tuning method described in the previous part to this model, an accuracy of 72.8\% is obtained. These results are shown by the confusion matrix below. (Figure 2)
+\begin{figure}[H]
+\centering
+\caption{Confusion-matrix resulting from the pre-trained model, with fine-tuning method}
+\includegraphics[width=8cm, height=8cm]{finetuning_model_results}
+\end{figure}
+
+When data augmentation is added to this method, the accuracy obtain is sligthly better, the accuracy is now 74.4\%. (Figure 3)
+\begin{figure}[H]
+\centering
+\caption{Confusion-matrix resulting from the pre-trained model, with fine-tuning and data augmentation methods}
+\includegraphics[width=8cm, height=8cm]{finetuning_data_augmentation_model_results}
+\end{figure}
+
+Regarding the features extraction, best results are obtained using the same pre-trained model and cuting the last block of it. The accuracy obtained is 72.6\% which is slightly lower than the one obtained with fine-tuning methods. This results is obtained using a Deep ML model as predictor, with classical models accuracy is better, but there is an overfitting problem. (Figure 4)
+\begin{figure}[H]
+\centering
+\caption{Confusion-matrix resulting from the pre-trained model as features extractor}
+\includegraphics[width=8cm, height=8cm]{extractor_model_results}
+\end{figure}
+
+When data augmentation is applied to this model, the results are slightly improved. The accuracy obtained is 77\%. (Figure 5)
+\begin{figure}[H]
+\centering
+\caption{Confusion-matrix resulting from the pre-trained model as features extractor, with data augmentation}
+\includegraphics[width=8cm, height=8cm]{extractor_data_augmentation_model_results}
+\end{figure}
+
 
 \section{Discussion}
 The discussion section aims at interpreting the results in light of the project's objectives. The most important goal of this section is to interpret the results so that the reader is informed of the insight or answers that the results provide. This section should also present an evaluation of the particular approach taken by the group. For example: Based on the results, how could the experimental procedure be improved? What additional, future work may be warranted? What recommendations can be drawn?
@@ -288,11 +324,23 @@ Conclusions should summarize the central points made in the Discussion section, 
 \section{Data and code availability}
 All the data and the code are available on \href{https://github.com/nsgln/Deep-Learning-Raman-Spectroscopy}{GitHub}
 
-\section*{References}
+\begin{thebibliography}{9}
+\bibitem{bacteria-ID} 
+Ho, CS., Jean, N., Hogan, C.A. and al.
+\textit{Rapid identification of pathogenic bacteria using Raman spectroscopy and deep learning}. 
+Nat Commun 10, 4927 (2019).
+\\\texttt{https://doi.org/10.1038/s41467-019-12898-9}
 
-The references section should contain complete citations following standard form.  The references should be numbered and listed in the order they were cited in the body of the report. In the text of the report, a particular reference can be cited by using a numerical number in brackets as \cite{Lee2015} that corresponds to its number in the reference list. \LaTeX provides several styles to format the references
+\bibitem{spectrum-recognition} 
+Jinchao, L., Osadchy, M., Ashton, L., Foster, M., Solomon, C.J. and Gibson, Stuart J.
+\textit{Deep convolutional neural networks for Raman spectrum recognition: a unified solution}.
+Analyst, 142, 4067-4074 (2017).
+\\\texttt{https://doi.org/10.1039/C7AN01371J}
 
-\bibliographystyle{IEEEtran}
-\bibliography{references.bib}
+\bibitem{data-augmentation} 
+Bjerrum, E.J., Glahder, M. and Skov, T.
+\textit{Data Augmentation of Spectral Data for Convolutional Neural Network (CNN) Based Deep Chemometrics}.
+\\\texttt{https://arxiv.org/pdf/1710.01927.pdf}
+\end{thebibliography}
 
 \end{document}

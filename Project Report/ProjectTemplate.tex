@@ -99,16 +99,31 @@ Romain Michelucci - 867644- r.michelucci@campus.unimib.it   \\[1cm] % Your name
 
 
 \begin{abstract}
-The ABSTRACT is not a part of the body of the report itself. Rather, the abstract is a brief summary of the report contents that is often separately circulated so potential readers can decide whether to read the report. The abstract should very concisely summarize the whole report: why it was written, what was discovered or developed, and what is claimed to be the significance of the effort. The abstract does not include figures or tables, and only the most significant numerical values or results should be given.
+%The ABSTRACT is not a part of the body of the report itself. Rather, the abstract is a brief summary of the report contents that is often separately circulated so potential readers can decide whether to read the report. The abstract should very concisely summarize the whole report: why it was written, what was discovered or developed, and what is claimed to be the significance of the effort. The abstract does not include figures or tables, and only the most significant numerical values or results should be given.
+
+Deep learning methods are used on many applications in Raman spectroscopy, especially for the identification of chemical species. Our case study is the classification of patients affected by Amyotrophic Lateral Sclerosis (ALS) and healthy ones (CTRL). Convolutional neural networks (CNNs) are trained to automatically extract features from a Raman spectrum without the need for preprocessing. However, the dataset used is small and unbalanced. Transfer Learning (TL) techniques appear as a good solution to this problem. Using pretrained models on bacterial Raman spectra, our goal is to increase performances (the overall accuracy while reducing its standard deviation?). Data augmentation methods are also involved trying to remedy this problem.
 \end{abstract}
 
+
 \section{Introduction}
-The introduction should provide a clear statement of the problem posed by the project, and why the problem is of interest. It should reflect the scenario, if available. If needed, the introduction also needs to present background information so that the reader can understand the significance of the problem. A brief summary of the hypotheses and the approach your group used to solve the problem should be given, possibly also including a concise introduction to theory or concepts used later to analyze and to discuss the results.
+%The introduction should provide a clear statement of the problem posed by the project, and why the problem is of interest. It should reflect the scenario, if available. If needed, the introduction also needs to present background information so that the reader can understand the significance of the problem. A brief summary of the hypotheses and the approach your group used to solve the problem should be given, possibly also including a concise introduction to theory or concepts used later to analyze and to discuss the results.
+Raman spectroscopy has the potential to identify substances and species of bacteria in a wide range of domains from life sciences laboratory to planetary exploration. Convolutional neural networks in the context of Raman spectroscopy has shown to outperform other machine learning methods with baseline corrected spectra*. However, CNNs are "data-hungry", they require a massive amount of data in order to extract the right features.
+	
+The dataset used is composed of 591 spectra, 393 for the ALS patients and 198 for the CTRL ones. Usually, a CNN can be well-trained on a few thousands of sample. In addition to the problem of the overall number of samples and other problem lies in the repartition of the number of samples per group (which is shown in table 1). Therefore, the dataset is small and unbalanced.
+
+Transfer learning aims at improving the performance on a target domain by transferring the knowledge contained in different but related source domains. Due to the fact that the dependence on a large number of target domain data can be reduced, TL has become a popular and promising area in machine learning.
+
+In this work, the effort is focused on trying different transfer learning experiments. The first consists in fine-tuning which consists of unfreezing a pre-trained models and re-training it on the new data. This can potentially achieve meaningful improvements by incrementally adapting the pretrained features to the new data. The second experiment is the most common incarnation of transfer learning : after taking the layers from a pre-trained model, the layers are freezed and some new trainable layers are added on top of the frozen ones. These new layers will learn to turn the old features into predictions on a new dataset.
+
+Finally some data augmentation methods will be applied. It is a wellknown technique for improving robustness and training of neural networks. The idea is to expand the number of training samples by adding some noise and small variations resulting in a more robust training. For spectral data, random offsets, mulitplication and gaussian noises are commonly used.
+
+Therefore comparisons between the different experiences will result in finding the model with the best performances.
+
 
 
 \section{Datasets}
-In this section the available data sets must be presented. The term dataset refers to any type of information source, for example web services for geolocation fall into this category. 
-In addition, all necessary data manipulation processes, such as cleaning and enrichment with external sources, must be presented and discussed.
+%In this section the available data sets must be presented. The term dataset refers to any type of information source, for example web services for geolocation fall into this category. 
+%In addition, all necessary data manipulation processes, such as cleaning and enrichment with external sources, must be presented and discussed.
 
 The main dataset provided is composed of spectra belonging to patients affected by Amyotrophic Lateral Sclerosis (ALS) and healthy ones (CTRL).
 
@@ -164,8 +179,6 @@ Groups & Patient ID & Samples range  & Samples count & Number of samples per gro
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
-
-
 
 
 

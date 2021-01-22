@@ -1,12 +1,13 @@
 # Deep-Learning-Raman-Spectroscopy
 
 ## Goal of the project
-The purpose of this repository is to use Transfer Learning in order to classify patients affected by Amyotrophic Lateral Sclerosis using Raman Spectroscopy
+The purpose of this repository is to use Transfer Learning in order to classify patients affected by Amyotrophic Lateral Sclerosis using Raman Spectroscopy.
+
 ![Project Presentation](https://github.com/nsgln/Deep-Learning-Raman-Spectroscopy/blob/main/ProjectPresentation.png)
 
 
 ## Dataset :
-The main dataset used in this project is composed of 393 spectra belonging to 20 patients
+The main dataset used in this project is composed of 393 spectra belonging to 20 patients.
 affected by Amyotrophic Lateral Sclerosis (ALS) and 198 to 10 healthy ones (CTRL).
 The data can be found [here](https://github.com/nsgln/Deep-Learning-Raman-Spectroscopy/tree/main/Raman_Data).
 

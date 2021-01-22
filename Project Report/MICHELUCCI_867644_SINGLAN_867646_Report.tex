@@ -278,6 +278,7 @@ The data augmentation techniques previously described are also applied with feat
 As expected, the dataset obtained is more balanced, which allows more constant results.
 
 \section{Results and Evaluation}
+
 For each experiment, the results are variable. So, the best results obtained are presented below.
 
 Using the second pre-trained model (finetuned on bacterial spectra) to predict on raw dataset, an average accuracy score of 66\% with a standard deviation of 1.11 is obtained. (Figure 1)
@@ -287,6 +288,7 @@ Using the second pre-trained model (finetuned on bacterial spectra) to predict o
 \includegraphics[width=10cm, height=10cm]{raw_model_results}
 \end{figure}
 
+\newpage
 Adding fine-tuning method described in the previous section to the same model resulted in an accuracy of 72.8$\pm$ 0.04. These results are illustrated by the confusion matrix below. (Figure 2)
 \begin{figure}[H]
 \centering
@@ -294,6 +296,7 @@ Adding fine-tuning method described in the previous section to the same model re
 \includegraphics[width=10cm, height=10cm]{finetuning_model_results}
 \end{figure}
 
+\newpage
 Whith the data augmentation, the accuracy obtained is sligthly better: 74.4 $\pm$ 0.01. (Figure 3)
 \begin{figure}[H]
 \centering
@@ -301,6 +304,7 @@ Whith the data augmentation, the accuracy obtained is sligthly better: 74.4 $\pm
 \includegraphics[width=10cm, height=10cm]{finetuning_data_augmentation_model_results}
 \end{figure}
 
+\newpage
 About the features extraction, the best performances are computed using the same pre-trained model and cuting its last block. The accuracy obtained is 72.6\% which is slightly lower than the one with the fine-tuning process. This result is attained using a Deep ML model as predictor. (Figure 4) Applying the classical model the accuracy is better, but overfitting occurs. 
 \begin{figure}[H]
 \centering
@@ -308,6 +312,7 @@ About the features extraction, the best performances are computed using the same
 \includegraphics[width=10cm, height=10cm]{extractor_model_results}
 \end{figure}
 
+\newpage
 When data augmentation is applied to the previous extractor model, the results slightly improved. The accuracy obtained is about 77\%. (Figure 5)
 \begin{figure}[H]
 \centering
@@ -317,7 +322,7 @@ When data augmentation is applied to the previous extractor model, the results s
 
 
 \section{Discussion}
-%The discussion section aims at interpreting the results in light of the project's objectives. The most important goal of this section is to interpret the results so that the reader is informed of the insight or answers that the results provide. This section should also present an evaluation of the particular approach taken by the group. For example: Based on the results, how could the experimental procedure be improved? What additional, future work may be warranted? What recommendations can be drawn?
+
 As mentionned in the previous section the results chosen are the best simulated after multiple runs and are quite variable. Depending on the distribution of the patients (and the samples) in the finetuning and features extractor tests, performances can drop.
 It is quite problematic as it is a medical concern. 
 In fact, if a healthy patient is diagnosed and treated for an illness it can be dangerous.
@@ -330,7 +335,7 @@ Our approach seems to be promising. However, some improvements could be done :
 \end{itemize}
 
 \section{Conclusions}
-%Conclusions should summarize the central points made in the Discussion section, reinforcing for the reader the value and implications of the work. If the results were not definitive, specific future work that may be needed can be (briefly) described. The conclusions should never contain ``surprises''. Therefore, any conclusions should be based on observations and data already discussed. It is considered extremely bad form to introduce new data in the conclusions.
+
 The Transfer Learning approach is a good approach for the analysis of the Raman spectra, especially in case of data scarsity. In addition, data augmentation techniques are helpful to make more robust models. 
 
 A future work could be to find some better way to augment spectral data like Generative Adversarial Networks (GANs). The generative models could demonstrate an improvement in the accuracy of ML classification and also a solution to the problem of requiring a large amount of training data.

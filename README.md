@@ -15,13 +15,14 @@ Notice that the pretrained model for the Transfer Learning experiments come from
 
 ## The project structure :
 It is composed of 3 directories:
-1) **Bacteria_TL** : all the files comes from [here](https://github.com/csho33/bacteria-ID) and is composed of : 
+1) **Bacteria_TL** - all the files comes from [here](https://github.com/csho33/bacteria-ID) and is composed of : 
     - 3 pretrained models i.e saved parameters for pre-trained CNN (*pretrained_model.ckpt*, *finetuned_model.ckpt* and *clinical_pretrained_model.ckpt* )
     - datasets.py - contains code for setting up datasets and dataloaders for spectral data
     - resnet.py - contains ResNet CNN model class
     - training.py - contains code for training CNN and making predictions
-2) **Project Report** : contains the final report of the project written in [LaTeX](https://www.latex-project.org/) using  MiKTeX and editing with [Texmaker](https://www.xm1math.net/texmaker/)
-3) **Raman_Data** : 2 sub-folder containing the spectra of [ALS](https://github.com/nsgln/Deep-Learning-Raman-Spectroscopy/tree/main/Raman_Data/ALS) et [CTRL](https://github.com/nsgln/Deep-Learning-Raman-Spectroscopy/tree/main/Raman_Data/CTRL) + a CSV file summing up the patient IDs and the samples IDs
+2) **Project Report** - contains the final report of the project written in [LaTeX](https://www.latex-project.org/) using  MiKTeX and editing with [Texmaker](https://www.xm1math.net/texmaker/)
+3) **Raman_Data** - 2 sub-folders containing the spectra of [ALS](https://github.com/nsgln/Deep-Learning-Raman-Spectroscopy/tree/main/Raman_Data/ALS) et [CTRL](https://github.com/nsgln/Deep-Learning-Raman-Spectroscopy/tree/main/Raman_Data/CTRL) + a CSV file summing up the patient IDs and the samples IDs
+4) **checkpoints** - it contains the checkpoints of the features extractor models developped in the notebook 4 and 6 
 
 It is also composed of 5 jupyter notebooks :
  - **1_test_models_dataset.ipynb** - file to *load the data*, *pre-process it* (removing negative values and features selection), *plot some of spectra* and *predict* on simple (LogisticRegression, DecisionTree) and a bit more complex (SVM, RandomForest) Machine Learning (ML) models using different splitting techniques (LeaveOneGroupOut and GroupKFold)

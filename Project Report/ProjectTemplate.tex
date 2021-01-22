@@ -226,6 +226,7 @@ To this end, each of the three provided models are "cut" at different levels :
 \item Before the last block : here, the last entire block is removed. It results in 74 features for each spectrum.
 \item Before the two last blocks : the entire two last blocks are removed from the pre-trained model. It is producing 147 features for each spectrum.
 \end{itemize}
+The "block" term is used in reference at the "Residual block" class defined by the bacteria-ID paper. This class is the main component of each model.
 
 From this technique, 9 features extractors are obtained, taking the data as input ang returning features as output. To obtain predictions, two different models are proposed :
 \begin{itemize}
@@ -282,35 +283,35 @@ Using the second pre-trained model (finetuned on bacterial spectra) to predict o
 \begin{figure}[H]
 \centering
 \caption{Confusion-matrix resulting from the pre-trained model}
-\includegraphics[width=8cm, height=8cm]{raw_model_results}
+\includegraphics[width=10cm, height=10cm]{raw_model_results}
 \end{figure}
 
 Adding fine-tuning method described in the previous section to the same model results in an accuracy of 72.8$\pm$ 0.04. These results are illustrated by the confusion matrix below. (Figure 2)
 \begin{figure}[H]
 \centering
 \caption{Confusion-matrix resulting from the pre-trained model, with fine-tuning method}
-\includegraphics[width=8cm, height=8cm]{finetuning_model_results}
+\includegraphics[width=10cm, height=10cm]{finetuning_model_results}
 \end{figure}
 
 Whith the data augmentation, the accuracy obtained is sligthly better :74.4 $\pm$ 0.01. (Figure 3)
 \begin{figure}[H]
 \centering
 \caption{Confusion-matrix resulting from the pre-trained model, with fine-tuning and data augmentation}
-\includegraphics[width=8cm, height=8cm]{finetuning_data_augmentation_model_results}
+\includegraphics[width=10cm, height=10cm]{finetuning_data_augmentation_model_results}
 \end{figure}
 
 About the features extraction, the best performances are obtained using the same pre-trained model and cuting its last block. The accuracy obtained is 72.6\% which is slightly lower than the one obtained with the fine-tuning process. This result is obtained using a Deep ML model as predictor. With classical models the accuracy is better, but there is an overfitting problem. (Figure 4)
 \begin{figure}[H]
 \centering
 \caption{Confusion-matrix resulting from the pre-trained model as features extractor}
-\includegraphics[width=8cm, height=8cm]{extractor_model_results}
+\includegraphics[width=10cm, height=10cm]{extractor_model_results}
 \end{figure}
 
 When data augmentation is applied to the previous extractor model, the results slightly improved. The accuracy obtained is about 77\%. (Figure 5)
 \begin{figure}[H]
 \centering
 \caption{Confusion-matrix resulting from the pre-trained model as features extractor, with data augmentation}
-\includegraphics[width=8cm, height=8cm]{extractor_data_augmentation_model_results}
+\includegraphics[width=10cm, height=10cm]{extractor_data_augmentation_model_results}
 \end{figure}
 
 

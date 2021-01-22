@@ -29,10 +29,11 @@ It is also composed of 5 jupyter notebooks :
  - **3_fine_tuning_experiments.ipynb** - After a custom splitting dataset technique producing a "finetunable" set and a "test" set, we finetune the predicted models in order to determine the best model and increase our average accuracy.
  - **4_features_extraction.ipynb** - Using each pretrained models of Bacteria-ID, features are extracted ("representing" our data), from different layer. Then, two different models are tested on these features : a classical model and a deep one. 
  - **5_data_augmentation.ipynb** - Using some data augmentation technique on spectral data (offset, multiplication and Gaussian noise), the finetuned models seems to obtained better results.
+ - **6_data_augmentation_with_features_extractor** - The methods of data augmentation previously used on the finetuned models are now applied to the features extraction method.
 
 
 Finally the remaining files are :
- - *data_loader.py* - a python file to load the data (factorization of code)
+ - *data_loader.py* - a python file to load the data (factorization of code
  - *extractor.py* - a modification of the resnet.py file class to extract features (by removing the final layers)
     
     
